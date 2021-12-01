@@ -23,5 +23,4 @@ solve' _ [] = id
 solve' c (x:xs) = solve' x xs . (+) (if x > c then 1 else 0)
 
 solve2 :: (Num a, Ord a) => [a] -> a
-solve2 [] = 0
 solve2 xs = solve (map sum . groupOf 3 $ xs)
