@@ -14,8 +14,6 @@ days = fromList [(1, (solveDay1Part1, solveDay1Part2)), (2, (solveDay2Part1, sol
 findDay :: Int -> Maybe ((IO (), IO ()))
 findDay = flip Data.Map.lookup days
 
-runDay :: Maybe ((IO (), IO ())) -> Either () () -> IO ()
+runDay :: Maybe ((IO (), IO ())) -> Bool -> IO ()
 runDay Nothing _ = putStrLn "Day not found"
-runDay (Just day) x = case x of
-                        Left  _ -> fst day
-                        Right _ -> snd day
+runDay (Just day) x = if x then fst day else snd day
