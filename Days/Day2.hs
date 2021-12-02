@@ -34,7 +34,4 @@ runInstruction ('f', a) aim x y True = (aim, x + a, y + (aim * a))
 
 toInstructions :: [String] -> [(Char, Int)]
 toInstructions [] = []
-toInstructions (x:xs) = toInstruction x : (toInstructions xs)
-
-toInstruction :: String -> (Char, Int)
-toInstruction s = (s !! 0, read $ words s !! 1)
+toInstructions (x:xs) = (x !! 0, read $ words x !! 1) : toInstructions xs
