@@ -1,7 +1,9 @@
 module Common(
     readInt,
     getInput,
-    groupOf
+    groupOf,
+    pairToList,
+    tripleToList
 ) where
 
 readInt :: String -> Int
@@ -16,3 +18,9 @@ groupOf :: Int -> [a] -> [[a]]
 groupOf n xs
     | length xs < n = []
     | otherwise = take n xs : groupOf n (drop 1 xs)
+
+pairToList :: (a, a) -> [a]
+pairToList (a, b) = [a, b]
+
+tripleToList :: (a, a, a) -> [a]
+tripleToList (a, b, c) = [a, b, c]
