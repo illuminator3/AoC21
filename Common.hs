@@ -8,6 +8,8 @@ module Common(
     tripleToList,
     lsubcombine,
     msubcombine,
+    lcommonElement,
+    mcommonElement,
     binToDec,
     mapEach
 ) where
