@@ -11,11 +11,17 @@ module Common(
     lcommonElement,
     mcommonElement,
     binToDec,
-    mapEach
+    mapEach,
+    splitBy,
+    getInputUntil,
+    trim,
+    splitByEl,
+    isSubset
 ) where
 
 import Data.Char
 import Data.List
+import Data.Set (isSubsetOf, fromList)
 
 readInt :: String -> Int
 readInt = read
@@ -24,6 +30,11 @@ getInput :: IO String
 getInput = getLine >>= \line -> if null line
                                     then return ""
                                     else getInput >>= \rest -> return $ line ++ "\n" ++ rest
+
+getInputUntil :: String -> IO String
+getInputUntil until = getLine >>= \line -> if line == until 
+                                                then return ""
+                                                else getInputUntil until >>= \rest -> return $ line ++ "\n" ++ rest
 
 groupOf :: Int -> [a] -> [[a]]
 groupOf n xs
@@ -65,3 +76,19 @@ binToDec s = foldl (\acc x -> acc * 2 + digitToInt x) 0 s
 mapEach :: [(a -> b)] -> [a] -> [b]
 mapEach _ [] = []
 mapEach fs xs = map (\(f, x) -> f x) $ zip fs xs
+
+splitBy :: String -> String -> [String]
+splitBy _ [] = []
+splitBy by s = let (x, y) = break (`elem` by) s
+                in x : splitBy by (drop 1 y)
+
+splitByEl :: Eq a => a -> [a] -> [[a]]
+splitByEl _ [] = []
+splitByEl el xs = let (x, y) = break (== el) xs
+                   in x : splitByEl el (drop 1 y)
+
+trim :: String -> String
+trim = unwords . words
+
+isSubset :: (Ord a) => [a] -> [a] -> Bool
+isSubset xs ys = isSubsetOf (fromList xs) (fromList ys)
