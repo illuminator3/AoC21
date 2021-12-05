@@ -16,12 +16,14 @@ module Common(
     getInputUntil,
     trim,
     splitByEl,
-    isSubset
+    isSubset,
+    removeUniques,
+    unique
 ) where
 
 import Data.Char
 import Data.List
-import Data.Set (isSubsetOf, fromList)
+import Data.Set (isSubsetOf, fromList, toList)
 
 readInt :: String -> Int
 readInt = read
@@ -90,5 +92,11 @@ splitByEl el xs = let (x, y) = break (== el) xs
 trim :: String -> String
 trim = unwords . words
 
-isSubset :: (Ord a) => [a] -> [a] -> Bool
+isSubset :: Ord a => [a] -> [a] -> Bool
 isSubset xs ys = isSubsetOf (fromList xs) (fromList ys)
+
+removeUniques :: Ord a => [a] -> [a]
+removeUniques = map head . filter (\x -> length x > 1) . group . sort
+
+unique :: Ord a => [a] -> [a]
+unique = toList . fromList
