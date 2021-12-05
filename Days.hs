@@ -12,7 +12,13 @@ import Days.Day3
 import Days.Day5
 
 days :: Map Int ((IO (), IO ()))
-days = fromList [(1, (solveDay1Part1, solveDay1Part2)), (2, (solveDay2Part1, solveDay2Part2)), (3, (solveDay3Part1, solveDay3Part2)), (4, (solveDay4Part1, solveDay4Part2)), (5, (solveDay5Part1, solveDay5Part2))]
+days = fromList [
+        (1, (solveDay1Part1, solveDay1Part2)),
+        (2, (solveDay2Part1, solveDay2Part2)),
+        (3, (solveDay3Part1, solveDay3Part2)),
+        (4, (solveDay4Part1, solveDay4Part2)),
+        (5, (solveDay5Part1, solveDay5Part2))
+    ]
 
 findDay :: Int -> Maybe ((IO (), IO ()))
 findDay = flip Data.Map.lookup days
