@@ -6,10 +6,13 @@ module Days.Day7 (
 import Common
 
 solveDay7Part1 :: IO ()
-solveDay7Part1 = show . solve (solveWith (\k x -> abs $ k - x)) . map read . splitBy "," <$> getInput >>= putStrLn
+solveDay7Part1 = solvePartWith $ \k x -> abs $ k - x
 
 solveDay7Part2 :: IO ()
-solveDay7Part2 = show . solve (solveWith (\k x -> sum [1..abs $ k - x])) . map read . splitBy "," <$> getInput >>= putStrLn
+solveDay7Part2 = solvePartWith $ \k x -> sum [1..abs $ k - x]
+
+solvePartWith :: (Int -> Int -> Int) -> IO ()
+solvePartWith f = show . solve (solveWith f) . map read . splitBy "," <$> getInput >>= putStrLn
 
 solve :: ([Int] -> [Int] -> Int) -> [Int] -> Int
 solve f xs = f [minimum xs..maximum xs] xs
