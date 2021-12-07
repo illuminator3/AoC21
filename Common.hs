@@ -18,7 +18,9 @@ module Common(
     splitByEl,
     isSubset,
     removeUniques,
-    unique
+    unique,
+    removeUniquesM,
+    amount
 ) where
 
 import Data.Char
@@ -76,8 +78,7 @@ binToDec :: String -> Int
 binToDec s = foldl (\acc x -> acc * 2 + digitToInt x) 0 s
 
 mapEach :: [(a -> b)] -> [a] -> [b]
-mapEach _ [] = []
-mapEach fs xs = map (\(f, x) -> f x) $ zip fs xs
+mapEach = zipWith ($)
 
 splitBy :: String -> String -> [String]
 splitBy _ [] = []
@@ -96,7 +97,13 @@ isSubset :: Ord a => [a] -> [a] -> Bool
 isSubset xs ys = isSubsetOf (fromList xs) (fromList ys)
 
 removeUniques :: Ord a => [a] -> [a]
-removeUniques = map head . filter (\x -> length x > 1) . group . sort
+removeUniques = removeUniquesM 1
+
+removeUniquesM :: Ord a => Int -> [a] -> [a]
+removeUniquesM n = map head . filter (\x -> length x > n) . group . sort
 
 unique :: Ord a => [a] -> [a]
 unique = toList . fromList
+
+amount :: Eq a => a -> [a] -> Int
+amount e = length . filter (== e)
