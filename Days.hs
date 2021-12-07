@@ -11,6 +11,7 @@ import Days.Day4
 import Days.Day3
 import Days.Day5
 import Days.Day6
+import Days.Day7
 
 days :: Map Int ((IO (), IO ()))
 days = fromList [
@@ -19,7 +20,8 @@ days = fromList [
         (3, (solveDay3Part1, solveDay3Part2)),
         (4, (solveDay4Part1, solveDay4Part2)),
         (5, (solveDay5Part1, solveDay5Part2)),
-        (6, (solveDay6Part1, solveDay6Part2))
+        (6, (solveDay6Part1, solveDay6Part2)),
+        (7, (solveDay7Part1, solveDay7Part2))
     ]
 
 findDay :: Int -> Maybe ((IO (), IO ()))
