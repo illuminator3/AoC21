@@ -19,6 +19,4 @@ solve f xs = f [minimum xs..maximum xs] xs
 
 solveWith :: (Int -> Int -> Int) -> [Int] -> [Int] -> Int
 solveWith f [] _ = maxBound
-solveWith f (x:xs) fx = if next < curr then next else curr
-                            where next = solveWith f xs fx
-                                  curr = sum $ map (\k -> f k x) fx
+solveWith f (x:xs) fx = minimum [solveWith f xs fx, sum $ map (\k -> f k x) fx]
