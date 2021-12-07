@@ -8,10 +8,10 @@ import Text.Parsec hiding (getInput)
 import Data.List
 
 solveDay5Part1 :: IO ()
-solveDay5Part1 = show <$> length <$> unique <$> removeUniques <$> concat <$> map expand <$> filter (\((x, y), (x', y')) -> x == x' || y == y') <$> map parseLine <$> lines <$> getInput >>= putStrLn
+solveDay5Part1 = show . length . unique . removeUniques . concat . map expand . filter (\((x, y), (x', y')) -> x == x' || y == y') . map parseLine . lines <$> getInput >>= putStrLn
 
 solveDay5Part2 :: IO ()
-solveDay5Part2 = show <$> length <$> unique <$> removeUniques <$> concat . concat <$> mapEach [map expand, map diagonals'] <$> mapEach [filter (\((x, y), (x', y')) -> x == x' || y == y'), filter (\((x, y), (x', y')) -> x /= x' && y /= y')] <$> replicate 2 <$> map parseLine <$> lines <$> getInput >>= putStrLn
+solveDay5Part2 = show . length . unique . removeUniques . concat . concat . mapEach [map expand, map diagonals'] . mapEach [filter (\((x, y), (x', y')) -> x == x' || y == y'), filter (\((x, y), (x', y')) -> x /= x' && y /= y')] . replicate 2 . map parseLine . lines <$> getInput >>= putStrLn
 
 parseLine :: String -> ((Int, Int), (Int, Int))
 parseLine s = get $ parse lineParser "" s

@@ -16,7 +16,7 @@ solveDay3Part2 = solve oxygen co2
                       run' f = flip f 0
 
 solve :: ([String] -> String) -> ([String] -> String) -> IO ()
-solve f1 f2 = show <$> product <$> map binToDec <$> mapEach [f1, f2] <$> replicate 2 <$> lines <$> getInput >>= putStrLn
+solve f1 f2 = show . product . map binToDec . mapEach [f1, f2] . replicate 2 . lines <$> getInput >>= putStrLn
 
 frun :: Char -> (String -> Char) -> [String] -> Int -> String
 frun _ _ [] _ = []
